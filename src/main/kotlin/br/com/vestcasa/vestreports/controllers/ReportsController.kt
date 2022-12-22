@@ -1,11 +1,13 @@
 package br.com.vestcasa.vestreports.controllers
 
-import br.com.vestcasa.vestreports.controllers.formatters.toResponse
-import br.com.vestcasa.vestreports.controllers.responses.ReportResponse
-import br.com.vestcasa.vestreports.controllers.responses.ReportTypeResponse
+import br.com.vestcasa.vestreports.controllers.formatters.paginate
+import br.com.vestcasa.vestreports.controllers.responses.PageResponse
+import br.com.vestcasa.vestreports.responseModels.ListAllReportsDataClass
+import br.com.vestcasa.vestreports.responseModels.ReportTypeDataClass
 import br.com.vestcasa.vestreports.services.ReportsService
+import org.springframework.data.domain.Pageable
+import org.springframework.data.web.PageableDefault
 import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
@@ -15,17 +17,12 @@ class ReportsController(
     private val reportsService: ReportsService
 ) {
     @GetMapping
-    fun listAll(): List<ReportResponse> {
-        return reportsService.findAll().map { it.toResponse() }
-    }
-
-    @GetMapping("/{id}")
-    fun findById(@PathVariable id: Int): ReportResponse? {
-        return reportsService.findById(id)?.toResponse()
+    fun listAll(@PageableDefault(page = 0, size = 10) pageable: Pageable): PageResponse<ListAllReportsDataClass> {
+        return reportsService.listAll(pageable, 5).paginate()
     }
 
     @GetMapping("/types")
-    fun findAllTypes(): List<ReportTypeResponse> {
-        return reportsService.findAllTypes().map { it.toResponse() }
+    fun findAllTypes(@PageableDefault(page = 0, size = 10) pageable: Pageable): PageResponse<ReportTypeDataClass> {
+        return reportsService.findAllTypes(pageable).paginate()
     }
 }

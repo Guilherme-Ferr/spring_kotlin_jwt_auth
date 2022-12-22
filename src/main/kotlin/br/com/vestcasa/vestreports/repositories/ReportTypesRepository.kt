@@ -1,6 +1,6 @@
 package br.com.vestcasa.vestreports.repositories
 
-import br.com.vestcasa.vestreports.models.ReportType
-import org.springframework.data.repository.CrudRepository
+import br.com.vestcasa.vestreports.responseModels.ReportTypeDataClass
+import org.springframework.data.jpa.repository.JpaRepository
 
-interface ReportTypesRepository : CrudRepository<ReportType, Int> {}
+interface ReportTypesRepository : JpaRepository<ReportTypeDataClass, Int> {}
