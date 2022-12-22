@@ -16,7 +16,7 @@ class ReportsService(
 
     fun findById(id: Int): Report? {
         return reportsRepository.findById(id).orElseThrow {
-            NotFoundException(Errors.NFR.message)
+            NotFoundException(errorMessage = "Report")
         }
     }
 }
