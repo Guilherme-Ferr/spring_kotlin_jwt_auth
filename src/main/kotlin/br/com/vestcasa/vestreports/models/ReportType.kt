@@ -1,4 +1,4 @@
-package br.com.vestcasa.vestreports.entities
+package br.com.vestcasa.vestreports.models
 
 import jakarta.persistence.*
 import java.util.*

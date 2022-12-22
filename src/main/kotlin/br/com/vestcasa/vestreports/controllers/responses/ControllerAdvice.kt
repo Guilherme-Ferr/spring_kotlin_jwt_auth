@@ -1,4 +1,4 @@
-package br.com.vestcasa.vestreports.configs
+package br.com.vestcasa.vestreports.controllers.responses
 
 import br.com.vestcasa.vestreports.controllers.responses.ErrorResponse
 import br.com.vestcasa.vestreports.controllers.responses.FieldsError

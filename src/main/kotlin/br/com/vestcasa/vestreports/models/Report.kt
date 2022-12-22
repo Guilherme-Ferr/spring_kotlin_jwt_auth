@@ -1,4 +1,4 @@
-package br.com.vestcasa.vestreports.entities
+package br.com.vestcasa.vestreports.models
 
 import jakarta.persistence.*
 import java.util.Date
@@ -13,13 +13,13 @@ data class Report(
 
     @ManyToOne
     @JoinColumn(name = "id_report_type")
-    val report_type: ReportType,
+    val reportType: ReportType,
 
     @Column
     val name: String,
 
     @Column
-    val embedded_id: String,
+    val embeddedId: String,
 
     @Column
     val image: String,
