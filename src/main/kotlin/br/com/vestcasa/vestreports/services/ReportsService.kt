@@ -14,8 +14,15 @@ class ReportsService(
     private val reportTypesRepository: ReportTypesRepository,
 ) {
 
-    fun listAll(pageable: Pageable, idUser: Int): Page<ListAllReportsDataClass> {
-        return reportsRepository.listAll(pageable, idUser)
+    fun listAll(
+        pageable: Pageable,
+        idUser: Int,
+    ): Page<ListAllReportsDataClass> {
+        print(idUser)
+
+        return reportsRepository.listAll(
+            pageable, idUser
+        )
     }
 
     fun findAllTypes(pageable: Pageable): Page<ReportTypeDataClass> {
