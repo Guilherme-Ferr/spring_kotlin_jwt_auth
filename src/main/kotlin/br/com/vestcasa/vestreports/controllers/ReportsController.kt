@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable
 import org.springframework.data.web.PageableDefault
 import org.springframework.web.bind.annotation.*
 
+
 @RestController
 @RequestMapping("reports")
 class ReportsController(
@@ -17,8 +18,15 @@ class ReportsController(
     @GetMapping
     fun listAll(
         @PageableDefault(page = 0, size = 10) pageable: Pageable,
+        @RequestParam type: String?,
+        @RequestParam name: String?,
     ): PageResponse<ListAllReportsDataClass> {
-        return reportsService.listAll(pageable, 5).paginate()
+        return reportsService.listAll(
+            pageable,
+            5,
+            type ?: "Estoque",
+            name ?: ""
+        ).paginate()
     }
 
     @GetMapping("/types")

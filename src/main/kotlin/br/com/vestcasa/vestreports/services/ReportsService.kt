@@ -17,11 +17,11 @@ class ReportsService(
     fun listAll(
         pageable: Pageable,
         idUser: Int,
+        type: String,
+        name: String
     ): Page<ListAllReportsDataClass> {
-        print(idUser)
-
         return reportsRepository.listAll(
-            pageable, idUser
+            pageable, idUser, type, name
         )
     }
 
