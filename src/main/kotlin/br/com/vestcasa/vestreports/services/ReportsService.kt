@@ -13,12 +13,12 @@ class ReportsService(
     private val reportsRepository: ReportsRepository,
     private val reportTypesRepository: ReportTypesRepository,
 ) {
-
     fun listAll(
         pageable: Pageable,
         idUser: Int,
         type: String,
-        name: String
+        name: String,
+        favoritesOnly: Boolean
     ): Page<ListAllReportsDataClass> {
         return reportsRepository.listAll(
             pageable, idUser, type, name

@@ -13,4 +13,3 @@ interface ReportsRepository : JpaRepository<ListAllReportsDataClass, Int> {
     )
     fun listAll(pageable: Pageable, idUser: Int, type: String, name: String): Page<ListAllReportsDataClass>
 }
-
