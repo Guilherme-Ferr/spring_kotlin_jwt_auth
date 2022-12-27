@@ -1,14 +1,12 @@
 package br.com.vestcasa.vestreports.configs
 
 import br.com.vestcasa.vestreports.controllers.responses.AuthenticateUserServiceResponse
-import br.com.vestcasa.vestreports.exceptions.UserAuthException
 import io.jsonwebtoken.Claims
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.SignatureAlgorithm
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Component
 import java.util.*
-import javax.naming.AuthenticationException
 
 @Component
 class JWTUtils {
@@ -26,10 +24,11 @@ class JWTUtils {
     }
 
     fun getClaimsFromUserToken(token: String): Claims {
-        try {
-            return Jwts.parser().setSigningKey(jwtSecret!!.toByteArray()).parseClaimsJws(token).body
-        } catch (ex: Exception) {
-            throw UserAuthException()
-        }
+        return Jwts.parser().setSigningKey(jwtSecret!!.toByteArray()).parseClaimsJws(token).body
+    }
+
+    fun validateToken(token: String): Boolean {
+        val claims = Jwts.parser().setSigningKey(jwtSecret!!.toByteArray()).parseClaimsJws(token).body
+        return !(claims.isNullOrEmpty() || claims.expiration == null || Date().after(claims.expiration))
     }
 }

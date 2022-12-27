@@ -3,6 +3,7 @@ package br.com.vestcasa.vestreports.exceptions.config
 import br.com.vestcasa.vestreports.controllers.responses.ErrorResponse
 import br.com.vestcasa.vestreports.controllers.responses.FieldsError
 import br.com.vestcasa.vestreports.exceptions.NotFoundException
+import br.com.vestcasa.vestreports.exceptions.TokenExpiredException
 import br.com.vestcasa.vestreports.exceptions.UserAuthException
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -28,5 +29,14 @@ class ControllerAdvice {
             listOf(FieldsError("User Token Forbidden", "authorization"))
         )
         return ResponseEntity(error, HttpStatus.FORBIDDEN)
+    }
+
+    @ExceptionHandler(TokenExpiredException::class)
+    fun handleTokenExpiredException(exception: TokenExpiredException, request: WebRequest): ResponseEntity<ErrorResponse> {
+        val error = ErrorResponse(
+            exception.message,
+            listOf(FieldsError("Token Expired", "authorization"))
+        )
+        return ResponseEntity(error, HttpStatus.UNAUTHORIZED)
     }
 }
