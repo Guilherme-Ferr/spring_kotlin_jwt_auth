@@ -18,7 +18,7 @@ class JWTUtils {
             .claim("id_user", user.id_user)
             .claim("name", user.name)
             .claim("email", user.email)
-            .setExpiration(Date(System.currentTimeMillis() + 60 * 24 * 1000))
+            .setExpiration(Date( System.currentTimeMillis() + 86400000))
             .signWith(SignatureAlgorithm.HS512, jwtSecret!!.toByteArray())
             .compact()
     }
