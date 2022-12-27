@@ -1,4 +1,4 @@
-package br.com.vestcasa.vestreports.controllers.responses
+package br.com.vestcasa.vestreports.exceptions.config
 
 import br.com.vestcasa.vestreports.controllers.responses.ErrorResponse
 import br.com.vestcasa.vestreports.controllers.responses.FieldsError
@@ -14,8 +14,8 @@ class ControllerAdvice {
     @ExceptionHandler(NotFoundException::class)
     fun handleNotFoundException(exception: NotFoundException, request: WebRequest): ResponseEntity<ErrorResponse> {
         val error = ErrorResponse(
-            exception.message!!,
-            listOf(FieldsError("${exception.errorMessage} Not Found", "id"))
+            exception.message,
+            listOf(FieldsError("${exception.paramNotFound} Not Found", "id"))
         )
         return ResponseEntity(error, HttpStatus.NOT_FOUND)
     }

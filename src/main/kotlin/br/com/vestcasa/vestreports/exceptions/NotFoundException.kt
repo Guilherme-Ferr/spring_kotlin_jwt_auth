@@ -1,8 +1,6 @@
 package br.com.vestcasa.vestreports.exceptions
 
-import org.cef.handler.CefLoadHandler.ErrorCode
-
 class NotFoundException(
-    override val message: String? = "not found",
-    val errorMessage: String
-) : Exception() {}
+    override val message: String = Errors.NF.message,
+    val paramNotFound: String
+) : Exception()

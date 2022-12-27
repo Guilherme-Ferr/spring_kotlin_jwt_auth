@@ -24,7 +24,7 @@ class ReportsController(
         return reportsService.listAll(
             pageable,
             5,
-            type ?: "Estoque",
+            type ?: "",
             name ?: "",
             favoritesOnly ?: false
         ).paginate()
